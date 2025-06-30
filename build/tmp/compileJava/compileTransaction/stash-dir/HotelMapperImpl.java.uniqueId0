@@ -1,0 +1,120 @@
+package com.example.demo.mapper;
+
+import com.example.demo.dto.HotelDTO;
+import com.example.demo.dto.RoomDTO;
+import com.example.demo.model.Hotel;
+import com.example.demo.model.Room;
+import java.util.ArrayList;
+import java.util.List;
+import javax.annotation.processing.Generated;
+import org.springframework.stereotype.Component;
+
+@Generated(
+    value = "org.mapstruct.ap.MappingProcessor",
+    date = "2025-06-25T23:10:33+0300",
+    comments = "version: 1.5.5.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.14.2.jar, environment: Java 17.0.15 (Microsoft)"
+)
+@Component
+public class HotelMapperImpl implements HotelMapper {
+
+    @Override
+    public HotelDTO toDTO(Hotel hotel) {
+        if ( hotel == null ) {
+            return null;
+        }
+
+        HotelDTO hotelDTO = new HotelDTO();
+
+        hotelDTO.setId( hotel.getId() );
+        hotelDTO.setName( hotel.getName() );
+        hotelDTO.setCity( hotel.getCity() );
+        hotelDTO.setAddress( hotel.getAddress() );
+        hotelDTO.setRooms( roomListToRoomDTOList( hotel.getRooms() ) );
+
+        return hotelDTO;
+    }
+
+    @Override
+    public Hotel toEntity(HotelDTO hotelDTO) {
+        if ( hotelDTO == null ) {
+            return null;
+        }
+
+        Hotel hotel = new Hotel();
+
+        hotel.setId( hotelDTO.getId() );
+        hotel.setName( hotelDTO.getName() );
+        hotel.setCity( hotelDTO.getCity() );
+        hotel.setAddress( hotelDTO.getAddress() );
+        hotel.setRooms( roomDTOListToRoomList( hotelDTO.getRooms() ) );
+
+        return hotel;
+    }
+
+    @Override
+    public void updateHotelFromDTO(HotelDTO hotelDTO, Hotel hotel) {
+        if ( hotelDTO == null ) {
+            return;
+        }
+
+        hotel.setName( hotelDTO.getName() );
+        hotel.setCity( hotelDTO.getCity() );
+        hotel.setAddress( hotelDTO.getAddress() );
+    }
+
+    protected RoomDTO roomToRoomDTO(Room room) {
+        if ( room == null ) {
+            return null;
+        }
+
+        RoomDTO roomDTO = new RoomDTO();
+
+        roomDTO.setId( room.getId() );
+        roomDTO.setType( room.getType() );
+        roomDTO.setPrice( room.getPrice() );
+        roomDTO.setAvailable( room.getAvailable() );
+
+        return roomDTO;
+    }
+
+    protected List<RoomDTO> roomListToRoomDTOList(List<Room> list) {
+        if ( list == null ) {
+            return null;
+        }
+
+        List<RoomDTO> list1 = new ArrayList<RoomDTO>( list.size() );
+        for ( Room room : list ) {
+            list1.add( roomToRoomDTO( room ) );
+        }
+
+        return list1;
+    }
+
+    protected Room roomDTOToRoom(RoomDTO roomDTO) {
+        if ( roomDTO == null ) {
+            return null;
+        }
+
+        Room room = new Room();
+
+        room.setId( roomDTO.getId() );
+        room.setType( roomDTO.getType() );
+        room.setPrice( roomDTO.getPrice() );
+        room.setAvailable( roomDTO.getAvailable() );
+
+        return room;
+    }
+
+    protected List<Room> roomDTOListToRoomList(List<RoomDTO> list) {
+        if ( list == null ) {
+            return null;
+        }
+
+        List<Room> list1 = new ArrayList<Room>( list.size() );
+        for ( RoomDTO roomDTO : list ) {
+            list1.add( roomDTOToRoom( roomDTO ) );
+        }
+
+        return list1;
+    }
+}
